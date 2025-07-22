@@ -1,8 +1,6 @@
-import mongoose, { Schema, Document } from 'mongoose';
+const mongoose = require("mongoose");
 
-
-
-const PropertySchema = new Schema({
+const PropertySchema = new mongoose.Schema({
   name: { 
     type: String, 
     required: [true, 'Building name is required'],
@@ -31,7 +29,7 @@ const PropertySchema = new Schema({
     type: String 
   },
   user: { 
-    type: Schema.Types.ObjectId, 
+    type: mongoose.Schema.Types.ObjectId, 
     ref: 'User',
     required: true
   }
@@ -45,4 +43,17 @@ const PropertySchema = new Schema({
 PropertySchema.index({ name: 1, user: 1 }, { unique: true });
 PropertySchema.index({ user: 1 });
 
-export default mongoose.model<IProperty>('Property', PropertySchema);
+// Update the updatedAt field before saving (similar to your User model)
+PropertySchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
+// If you want to add any virtual properties (like your User model example)
+// PropertySchema.virtual('someVirtual').get(function() {
+//   return someValue;
+// });
+
+const Property = mongoose.model("Property", PropertySchema);
+
+module.exports = Property;

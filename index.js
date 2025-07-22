@@ -8,6 +8,7 @@ const app = express();
 const server = http.createServer(app);
 
 const userRoutes = require("./routes/UserRoute");
+const propertyRoutes = require("./routes/PropertyRoute");
 
 app.use(cors({origin:"*"}));
 app.use(express.json());
@@ -26,6 +27,7 @@ mongoose
 
 // Routes
 app.use("/api/user", userRoutes);
+app.use("/api/property", propertyRoutes);
 
 // Error handling
 app.use((err, req, res, next) => {

@@ -12,8 +12,8 @@ exports.registerNewUser = async (req, res, next) => {
 
 // Signup controller
 // controllers/authController.js
-const generateOTP = () => Math.floor(1000 + Math.random() * 9000).toString(); // 4-digit OTP
-
+// const generateOTP = () => Math.floor(1000 + Math.random() * 9000).toString(); // 4-digit OTP
+const generateOTP = "1234";
 exports.sendOTP = async (req, res, next) => {
   console.log(req.body)
   try {
