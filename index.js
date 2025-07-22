@@ -9,7 +9,7 @@ const server = http.createServer(app);
 
 const userRoutes = require("./routes/UserRoute");
 
-app.use(cors());
+app.use(cors({origin:"*"}));
 app.use(express.json());
 
 // DB Connection
